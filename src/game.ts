@@ -3,20 +3,29 @@ import { random } from 'lodash'
 type GameType = 'coin' | 'roulette'
 
 export const runGame = (gambler: Gambler, game: GameType): Gambler => {
-  const { initialBet, initialWallet, currentBet, currentWallet, lossCount } =
-    gambler
+  const {
+    id,
+    initialBet,
+    initialWallet,
+    currentBet,
+    currentWallet,
+    lossCount,
+  } = gambler
 
   // run gambler
   const walletWithoutBet = currentWallet - currentBet
-  const gamblerBet = random(0, 1)
+  const gamblerBet = random(0, 100)
 
   // run game
   const odds = 2
-  const randomNumber = random(0, 1)
+  // const randomNumber = random(0, 100)
 
   // if win
-  if (gamblerBet === randomNumber) {
+  const win = gamblerBet <= 48
+  // if (gamblerBet === randomNumber) {
+  if (win) {
     return {
+      id: id + 1,
       initialBet,
       currentBet: initialBet,
       initialWallet,
@@ -29,6 +38,7 @@ export const runGame = (gambler: Gambler, game: GameType): Gambler => {
   // if lose
   else {
     return {
+      id: id + 1,
       initialBet,
       // double their next bet
       currentBet: currentBet * 2,
@@ -41,6 +51,7 @@ export const runGame = (gambler: Gambler, game: GameType): Gambler => {
 }
 
 export interface Gambler {
+  id: number
   initialBet: number
   currentBet: number
   initialWallet: number

@@ -17,6 +17,7 @@ import { Gambler, GameState, runGame } from './game'
 import Graph from './Graph'
 
 const initialGambler: Gambler = {
+  id: 0,
   initialBet: 0,
   currentBet: 0,
   initialWallet: 0,

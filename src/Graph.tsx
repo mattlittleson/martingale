@@ -13,9 +13,9 @@ import { Gambler } from './game'
 
 export default function Graph(props: { data: Gambler[] }) {
   const { data } = props
-  const formatted = data.map((data, index) => ({
+  const formatted = data.map((data) => ({
     ...data,
-    name: `${index}`,
+    name: `${data.id}`,
   }))
   return (
     <ResponsiveContainer
