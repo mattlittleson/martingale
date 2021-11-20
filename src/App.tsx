@@ -105,7 +105,8 @@ export default function App() {
 
   return (
     <Container>
-      <Stack spacing={4} style={{ marginTop: 24 }}>
+      <Stack spacing={4} style={{ marginTop: 16 }}>
+        <Text fontSize='2xl'>Martingale betting system</Text>
         <Image
           boxSize='150px'
           objectFit='contain'
@@ -202,7 +203,7 @@ export default function App() {
           aria-label='slider-ex-1'
           value={currentIndex}
           min={0}
-          max={history.length - 1}
+          max={Math.max(0, history.length - 2)}
           step={1}
           onChange={(val) => setCurrentIndex(val)}
         >
@@ -211,19 +212,33 @@ export default function App() {
           </SliderTrack>
           <SliderThumb />
         </Slider>
-        <Button
-          colorScheme='teal'
-          variant='solid'
-          onClick={() => {
-            for (let i = 0; i < 1000; i++) {
+        <Stack direction='row' spacing={4}>
+          <Button
+            isFullWidth
+            colorScheme='teal'
+            variant='solid'
+            onClick={() => {
               dispatch({
                 type: 'run',
               })
-            }
-          }}
-        >
-          Bet
-        </Button>
+            }}
+          >
+            Bet
+          </Button>
+          <Button
+            colorScheme='orange'
+            variant='solid'
+            onClick={() => {
+              for (let i = 0; i < 100; i++) {
+                dispatch({
+                  type: 'run',
+                })
+              }
+            }}
+          >
+            x100
+          </Button>
+        </Stack>
       </Stack>
     </Container>
   )
