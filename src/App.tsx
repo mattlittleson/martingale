@@ -13,6 +13,7 @@ import {
   SliderFilledTrack,
   SliderThumb,
 } from '@chakra-ui/react'
+import monki from './monki.png'
 import { Gambler, GameState, runGame } from './game'
 import Graph from './Graph'
 
@@ -107,12 +108,7 @@ export default function App() {
     <Container>
       <Stack spacing={4} style={{ marginTop: 16 }}>
         <Text fontSize='2xl'>Martingale betting system</Text>
-        <Image
-          boxSize='150px'
-          objectFit='contain'
-          src='/monki.png'
-          alt='monki'
-        />
+        <Image boxSize='150px' objectFit='contain' src={monki} alt='monki' />
         <Stack spacing={4} direction='row'>
           <div>
             <Text fontSize='2xl'>Bet</Text>
