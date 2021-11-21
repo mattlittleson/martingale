@@ -12,6 +12,7 @@ import {
   SliderTrack,
   SliderFilledTrack,
   SliderThumb,
+  Grid,
 } from '@chakra-ui/react'
 import monki from './monki.png'
 import { Gambler, GameState, runGame } from './game'
@@ -163,6 +164,7 @@ export default function App() {
             colorScheme='teal'
             variant='outline'
             onClick={() => {
+              setCurrentIndex(0)
               dispatch({
                 type: 'reset',
               })
@@ -171,16 +173,14 @@ export default function App() {
             Reset
           </Button>
         </Stack>
-        <Stack direction='row' spacing={4} justifyContent='space-between'>
+        <Grid templateColumns='repeat(4, 1fr)' gap={4}>
           <Text fontSize='1xl' textAlign='center'>
             Current Bet
-            <br />
-            {addCommas(currentBet)}
+            <br />${addCommas(currentBet)}
           </Text>
           <Text fontSize='1xl' textAlign='center'>
             Current Wallet
-            <br />
-            {addCommas(currentWallet)}
+            <br />${addCommas(currentWallet)}
           </Text>
 
           <Text fontSize='1xl' textAlign='center'>
@@ -193,7 +193,8 @@ export default function App() {
               ? history[history.length - 1].gambleType
               : undefined}
           </Text>
-        </Stack>
+        </Grid>
+
         <Graph data={history.slice(currentIndex, history.length - 1)} />
         <Slider
           aria-label='slider-ex-1'
@@ -210,6 +211,7 @@ export default function App() {
         </Slider>
         <Stack direction='row' spacing={4}>
           <Button
+            disabled={currentBet === 0 || currentWallet === 0}
             isFullWidth
             colorScheme='teal'
             variant='solid'
@@ -222,6 +224,7 @@ export default function App() {
             Bet
           </Button>
           <Button
+            disabled={currentBet === 0 || currentWallet === 0}
             colorScheme='orange'
             variant='solid'
             onClick={() => {
